@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>南无阿弥陀佛 - 西方极乐世界</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+        }
+        
+        :root {
+            --gold: #D4AF37;
+            --deep-red: #8B0000;
+            --light-gold: #F5DEB3;
+            --cream: #FFF8E7;
+            --dark-brown: #4A2C2A;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--cream) 0%, #f9f4e8 100%);
+            color: var(--dark-brown);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M20,50 Q50,20 80,50 Q50,80 20,50" fill="none" stroke="rgba(212, 175, 55, 0.05)" stroke-width="1"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+        
+        .lotus-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0.1;
+            z-index: -1;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,15 C60,15 70,20 75,30 C80,40 75,50 70,60 C65,70 60,75 50,75 C40,75 35,70 30,60 C25,50 20,40 25,30 C30,20 40,15 50,15 Z" fill="none" stroke="%23D4AF37" stroke-width="2"/></svg>');
+            background-size: 120px;
+            background-repeat: repeat;
+        }
+        
+        .title {
+            font-size: 3.5rem;
+            color: var(--deep-red);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            letter-spacing: 3px;
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        /* 导航栏 */
+        nav {
+            display: flex;
+            justify-content: center;
+            background: rgba(139, 0, 0, 0.8);
+            border-radius: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 12px;
+        }
+        
+        nav a {
+            color: var(--light-gold);
+            text-decoration: none;
+            padding: 10px 25px;
+            margin: 0 10px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+        
+        nav a:hover, nav a.active {
+            background: var(--gold);
+            color: var(--deep-red);
+        }
+        
+        /* 主内容区 */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .card h2 {
+            color: var(--deep-red);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--gold);
+            font-size: 1.8rem;
+        }
+        
+        /* 阿弥陀佛简介 */
+        .buddha-intro {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        
+        .buddha-image {
+            flex: 0 0 200px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 3px solid var(--light-gold);
+        }
+        
+        .buddha-image img {
+            width: 100%;
+            display: block;
+        }
+        
+        .intro-text {
+            flex: 1;
+        }
+        
+        .intro-text p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        /* 念佛计数器 */
+        .counter-box {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(135deg, var(--light-gold) 0%, #e8d9b0 100%);
+            border-radius: 15px;
+            margin: 25px 0;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .counter-display {
+            font-size: 4rem;
+            color: var(--deep-red);
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        
+        .counter-btn {
+            background: var(--deep-red);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 0 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .counter-btn:hover {
+            background: var(--gold);
+            color: var(--dark-brown);
+            transform: translateY(-3px);
+        }
+        
+        /* 佛号播放器 */
+        .audio-player {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .audio-controls {
+            flex: 1;
+        }
+        
+        .audio-title {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--deep-red);
+        }
+        
+        .play-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: none;
+            color: var(--deep-red);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .play-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        /* 佛经引用 */
+        .sutra-quote {
+            font-style: italic;
+            padding: 25px;
+            background: linear-gradient(135deg, #f8f4e5 0%, #f1e8d0 100%);
+            border-left: 5px solid var(--gold);
+            margin: 25px 0;
+            border-radius: 0 15px 15px 0;
+            position: relative;
+        }
+        
+        .sutra-quote::before {
+            content: """;
+            font-size: 5rem;
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            color: rgba(212, 175, 55, 0.3);
+            font-family: serif;
+        }
+        
+        .sutra-source {
+            text-align: right;
+            font-style: normal;
+            margin-top: 15px;
+            color: var(--deep-red);
+        }
+        
+        /* 冥想计时器 */
+        .meditation-timer {
+            text-align: center;
+        }
+        
+        .timer-display {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--deep-red);
+            margin: 20px 0;
+        }
+        
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .timer-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            background: var(--deep-red);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .timer-btn:hover {
+            background: var(--gold);
+            color: var(--dark-brown);
+            transform: scale(1.1);
+        }
+        
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(139, 0, 0, 0.9);
+            color: var(--light-gold);
+            border-radius: 20px 20px 0 0;
+            margin-top: 40px;
+        }
+        
+        .dharma-wheel {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: var(--light-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--deep-red);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+            }
+            
+            nav a {
+                padding: 8px 15px;
+                margin: 5px;
+                font-size: 0.9rem;
+            }
+            
+            .buddha-intro {
+                flex-direction: column;
+            }
+            
+            .buddha-image {
+                flex: 0 0 auto;
+                width: 70%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="lotus-bg"></div>
+            <h1 class="title">南无阿弥陀佛</h1>
+            <p class="subtitle">慈悲接引 · 往生净土 · 离苦得乐</p>
+            
+            <nav>
+                <a href="#" class="active">首页</a>
+                <a href="#">阿弥陀佛简介</a>
+                <a href="#">净土经典</a>
+                <a href="#">念佛方法</a>
+                <a href="#">往生见证</a>
+                <a href="#">佛教资源</a>
+            </nav>
+        </header>
+        
+        <div class="main-content">
+            <div class="left-column">
+                <div class="card">
+                    <h2>阿弥陀佛简介</h2>
+                    <div class="buddha-intro">
+                        <div class="buddha-image">
+                            <!-- 阿弥陀佛像占位符 -->
+                            <div style="background: linear-gradient(135deg, #e8d9b0 0%, #d4bc7a 100%); height: 300px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-hands-praying" style="font-size: 5rem; color: #8B0000;"></i>
+                            </div>
+                        </div>
+                        <div class="intro-text">
+                            <p>阿弥陀佛（梵语：Amitābha），又称无量光佛、无量寿佛，是西方极乐世界的教主。在佛教净土宗信仰中，持念阿弥陀佛名号，可蒙佛接引往生西方净土，永离轮回之苦。</p>
+                            <p>阿弥陀佛在成佛前曾发四十八大愿，其中第十八愿言："设我得佛，十方众生，至心信乐，欲生我国，乃至十念，若不生者，不取正觉。"此即净土宗"念佛往生"之根本依据。</p>
+                            <p>常念"南无阿弥陀佛"六字洪名，可消除罪业、增长福慧、得佛护佑，临终蒙佛接引，往生极乐世界，成就无上佛道。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="counter-box">
+                        <h3>念佛计数器</h3>
+                        <p>诚心称念佛号，累积功德资粮</p>
+                        <div class="counter-display">0</div>
+                        <button class="counter-btn" id="count-btn">
+                            <i class="fas fa-hands-praying"></i> 念佛一声
+                        </button>
+                        <button class="counter-btn" id="reset-btn">
+                            <i class="fas fa-redo"></i> 重新计数
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2>净土经典</h2>
+                    <div class="sutra-quote">
+                        "从是西方，过十万亿佛土，有世界名曰极乐。其土有佛，号阿弥陀，今现在说法。"
+                        <div class="sutra-source">——《佛说阿弥陀经》</div>
+                    </div>
+                    
+                    <div class="sutra-quote">
+                        "若有善男子、善女人，闻说阿弥陀佛，执持名号，若一日、若二日、若三日、若四日、若五日、若六日、若七日，一心不乱。其人临命终时，阿弥陀佛与诸圣众，现在其前。是人终时，心不颠倒，即得往生阿弥陀佛极乐国土。"
+                        <div class="sutra-source">——《佛说阿弥陀经》</div>
+                    </div>
+                    
+                    <div class="sutra-quote">
+                        "设我得佛，十方众生，发菩提心，修诸功德，至心发愿，欲生我国，临寿终时，假令不与大众围绕现其人前者，不取正觉。"
+                        <div class="sutra-source">——《佛说无量寿经》· 第十九愿</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="right-column">
+                <div class="card">
+                    <h2>佛号播放</h2>
+                    <p>聆听佛号，清净身心，增长善根</p>
+                    
+                    <div class="audio-player">
+                        <button class="play-btn" id="play-btn">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <div class="audio-controls">
+                            <div class="audio-title">南无阿弥陀佛 (循环播放)</div>
+                            <div>佛号唱诵：妙音法师</div>
+                        </div>
+                    </div>
+                    
+                    <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">
+                        <i class="fas fa-info-circle"></i> 建议：每日静心聆听佛号10-30分钟，可配合念佛或静坐
+                    </p>
+                </div>
+                
+                <div class="card meditation-timer">
+                    <h2>冥想计时器</h2>
+                    <p>设置念佛或冥想时间</p>
+                    
+                    <div class="timer-display" id="timer">10:00</div>
+                    
+                    <div class="timer-controls">
+                        <button class="timer-btn" id="minus-btn">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button class="timer-btn" id="start-btn">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="timer-btn" id="plus-btn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <button class="timer-btn" id="reset-timer-btn">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
+                    
+                    <div style="margin-top: 25px; padding: 15px; background: rgba(212, 175, 55, 0.1); border-radius: 10px;">
+                        <h3>念佛方法</h3>
+                        <p>1. 端身正坐，放松身心</p>
+                        <p>2. 随呼吸默念或出声念"南无阿弥陀佛"</p>
+                        <p>3. 心念耳闻，字字分明</p>
+                        <p>4. 每日坚持，持之以恒</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <div class="dharma-wheel">
+                <i class="fas fa-yin-yang"></i>
+            </div>
+            <p>愿以此功德，庄严佛净土。上报四重恩，下济三途苦。</p>
+            <p>若有见闻者，悉发菩提心。尽此一报身，同生极乐国。</p>
+            <p style="margin-top: 20px;">南无阿弥陀佛 © 2023 净土念佛网</p>
+        </footer>
+    </div>
+    
+    <audio id="buddha-chant" loop>
+        <!-- 实际项目中请替换为真实音频文件 -->
+        <source src="#" type="audio/mpeg">
+        您的浏览器不支持音频播放。
+    </audio>
+
+    <script>
+        // 念佛计数器功能
+        let count = 0;
+        const counterDisplay = document.querySelector('.counter-display');
+        const countBtn = document.getElementById('count-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        
+        countBtn.addEventListener('click', () => {
+            count++;
+            counterDisplay.textContent = count;
+        });
+        
+        resetBtn.addEventListener('click', () => {
+            count = 0;
+            counterDisplay.textContent = count;
+        });
+        
+        // 佛号播放器功能
+        const audioPlayer = document.getElementById('buddha-chant');
+        const playBtn = document.getElementById('play-btn');
+        let isPlaying = false;
+        
+        playBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audioPlayer.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                audioPlayer.play();
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+            isPlaying = !isPlaying;
+        });
+        
+        // 冥想计时器功能
+        const timerDisplay = document.getElementById('timer');
+        const startBtn = document.getElementById('start-btn');
+        const minusBtn = document.getElementById('minus-btn');
+        const plusBtn = document.getElementById('plus-btn');
+        const resetTimerBtn = document.getElementById('reset-timer-btn');
+        
+        let minutes = 10;
+        let seconds = 0;
+        let timerInterval;
+        let isTimerRunning = false;
+        
+        function updateTimerDisplay() {
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        minusBtn.addEventListener('click', () => {
+            if (minutes > 1 && !isTimerRunning) {
+                minutes--;
+                updateTimerDisplay();
+            }
+        });
+        
+        plusBtn.addEventListener('click', () => {
+            if (minutes < 60 && !isTimerRunning) {
+                minutes++;
+                updateTimerDisplay();
+            }
+        });
+        
+        startBtn.addEventListener('click', () => {
+            if (isTimerRunning) {
+                // 暂停计时器
+                clearInterval(timerInterval);
+                startBtn.innerHTML = '<i class="fas fa-play"></i>';
+                isTimerRunning = false;
+            } else {
+                // 开始计时器
+                startBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                isTimerRunning = true;
+                
+                timerInterval = setInterval(() => {
+                    if (seconds === 0) {
+                        if (minutes === 0) {
+                            // 计时结束
+                            clearInterval(timerInterval);
+                            startBtn.innerHTML = '<i class="fas fa-play"></i>';
+                            isTimerRunning = false;
+                            alert("冥想时间结束！功德圆满！");
+                            return;
+                        }
+                        minutes--;
+                        seconds = 59;
+                    } else {
+                        seconds--;
+                    }
+                    updateTimerDisplay();
+                }, 1000);
+            }
+        });
+        
+        resetTimerBtn.addEventListener('click', () => {
+            clearInterval(timerInterval);
+            minutes = 10;
+            seconds = 0;
+            updateTimerDisplay();
+            startBtn.innerHTML = '<i class="fas fa-play"></i>';
+            isTimerRunning = false;
+        });
+        
+        // 初始化显示
+        updateTimerDisplay();
+    </script>
+</body>
+</html>
